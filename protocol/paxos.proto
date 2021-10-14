@@ -1,0 +1,35 @@
+syntax = "proto3";
+option go_package = "./;paxos";
+
+package paxos;
+
+message Request {
+    uint32 tid = 1;
+    uint32 version = 2;
+}
+
+message Prepare {
+    uint32 tid = 1;
+}
+
+message Promise {
+    uint32 tid = 1;
+}
+
+message ProPose {
+    uint32 tid = 1;
+}
+
+message Accept {
+    uint32 tid = 1;
+}
+
+message Learn {
+    uint32 tid = 1;
+}
+
+service Sessional
+{
+	rpc Put(Request) returns (Learn);               //leveldb Put
+    rpc PutWithVersion(Request) returns (Learn);
+}

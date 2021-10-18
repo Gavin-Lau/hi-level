@@ -15,4 +15,4 @@
 # vendor/
 .idea/
 .vscode/
-protocol/*.pb.go
+protocol/*/*.pb.go

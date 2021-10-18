@@ -1,0 +1,17 @@
+syntax = "proto3";
+option go_package = "./LEVELCONFIG";
+
+package LEVELCONFIG;
+
+message GConfigReq{
+    bytes key = 1;
+}
+
+message GConfigRsp{
+    bytes value = 1;
+}
+
+service GConfig
+{
+    rpc GetConfigByKey(GConfigReq) returns (GConfigRsp);
+}

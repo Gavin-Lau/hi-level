@@ -1,35 +1,41 @@
 syntax = "proto3";
-option go_package = "./;paxos";
+option go_package = "./PAXOS";
 
-package paxos;
+package PAXOS;
+
+enum MsgType
+{
+    PAXOS_unknown = 0;
+    PAXOS_Prepare = 1;
+    PAXOS_Promise = 2;
+    PAXOS_Propose = 3;
+    PAXOS_Accept = 4;
+}
 
 message Request {
-    uint32 tid = 1;
-    uint32 version = 2;
-}
-
-message Prepare {
-    uint32 tid = 1;
-}
-
-message Promise {
-    uint32 tid = 1;
-}
-
-message ProPose {
-    uint32 tid = 1;
-}
-
-message Accept {
-    uint32 tid = 1;
+    MsgType type = 1;
+    uint32 tid = 2;
+    uint32 version = 3;
 }
 
 message Learn {
     uint32 tid = 1;
+    uint32 stage = 2;
+}
+
+message Reqbuf {
+    bytes content = 1;
+    uint32 contenttype = 2;
+}
+
+message StateMsg {
+    MsgType mtype = 1;
+    Reqbuf  buf = 2;
 }
 
 service Sessional
 {
 	rpc Put(Request) returns (Learn);               //leveldb Put
+    rpc PaxosPut(Request) returns (Learn);          //leveldb Put with Paxos
     rpc PutWithVersion(Request) returns (Learn);
 }

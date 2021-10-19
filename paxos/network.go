@@ -3,14 +3,19 @@ package paxos
 import (
 	"context"
 
-	pb "github.com/Gavin-Lau/hi-level/protocol"
+	"github.com/Gavin-Lau/hi-level/protocol/PAXOS"
 )
 
-type server struct {
-	pb.UnimplementedSessionalServer
+type Paxosserver struct {
+	PAXOS.UnimplementedSessionalServer
 }
 
-func (s *server) Put(ctx context.Context, in *pb.PAXOS.Request) (*pb.Learn, error) {
+func (s *Paxosserver) Put(ctx context.Context, in *PAXOS.Request) (*PAXOS.Learn, error) {
 	//create
-	return &pb.Learn{Tid: 100}, nil
+	return &PAXOS.Learn{Tid: 100}, nil
+}
+
+func (s *Paxosserver) Prepare(ctx context.Context, in *PAXOS.Request) (*PAXOS.Learn, error) {
+
+	return &PAXOS.Learn{Tid: 100}, nil
 }

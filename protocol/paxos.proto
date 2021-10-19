@@ -35,7 +35,12 @@ message StateMsg {
 
 service Sessional
 {
-	rpc Put(Request) returns (Learn);               //leveldb Put
-    rpc PaxosPut(Request) returns (Learn);          //leveldb Put with Paxos
+	rpc Put(Request) returns (Learn);               //leveldb 
+    rpc PaxosPut(Request) returns (Learn);          //leveldb 
     rpc PutWithVersion(Request) returns (Learn);
+
+    rpc Prepare(Request) returns (Learn); //Paxos prepare
+    rpc Promise(Request) returns (Learn); //Paxos promise
+    rpc Accept(Request) returns (Learn); //Paxos accept
+
 }
